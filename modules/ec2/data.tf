@@ -1,4 +1,4 @@
 
-data "vault_generic_secret" "ssh_secret" {
-  path = "infra/data/ssh"
+data "vault_generic_secret" "ssh" {
+  path = "infra/ssh"
 }
