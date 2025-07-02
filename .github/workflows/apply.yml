@@ -1,5 +1,5 @@
 name: terraform apply
-on: [push]
+on: workflow_dispatch
 jobs:
 
   # before apply run init plan and then apply this is training so skipping to apply
@@ -29,8 +29,8 @@ jobs:
       - name: echo
         run: echo "hello world"
 
-#      - name: check repo
-#        uses: actions/checkout@v4
-#
-#      - name: terraform apply
-#        run: terraform apply -backend-config=env-dev/state.tfvars -auto-approve
+      - name: check repo
+        uses: actions/checkout@v4
+
+      - name: terraform apply
+        run: terraform apply -backend-config=env-dev/state.tfvars -auto-approve
