@@ -1,5 +1,5 @@
 name: terraform apply
-on: push
+on: workflow_dispatch
 jobs:
 
   # before apply run init plan and then apply this is training so skipping to apply
