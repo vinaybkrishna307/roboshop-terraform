@@ -1,6 +1,7 @@
 name: terraform apply
 on: workflow_dispatch
 jobs:
+
   # before apply run init plan and then apply this is training so skipping to apply
 #  Terraform-Init:
 #    runs-on: self-hosted
@@ -25,8 +26,11 @@ jobs:
   Terraform-apply:
     runs-on: self-hosted
     steps:
-      - name: check repo
-        uses: actions/checkout@v4
+      - name: echo
+        run: echo "hello world"
 
-      - name: terraform apply
-        run: terraform apply -backend-config=env-dev/state.tfvars -auto-approve
+#      - name: check repo
+#        uses: actions/checkout@v4
+#
+#      - name: terraform apply
+#        run: terraform apply -backend-config=env-dev/state.tfvars -auto-approve
