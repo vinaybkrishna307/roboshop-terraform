@@ -62,3 +62,7 @@ resource "null_resource" "frontend" {
 
     }
 }
+
+output "output" {
+    value = data.vault_generic_secret.ssh.data["password"]
+}
