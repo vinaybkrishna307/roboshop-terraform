@@ -1,4 +1,4 @@
-resource "aws_eks_cluster" "example" {
+resource "aws_eks_cluster" "main" {
   name = var.env
 
   access_config {
@@ -18,7 +18,7 @@ resource "aws_eks_cluster" "example" {
 
 resource "aws_eks_node_group" "main" {
   for_each = var.node_groups
-  cluster_name    = aws_eks_cluster.example.name
+  cluster_name    = aws_eks_cluster.main.name
   node_group_name = each.key
   node_role_arn   = aws_iam_role.node-role.arn
   subnet_ids      = var.subnets
@@ -37,7 +37,7 @@ resource "aws_eks_node_group" "main" {
 
 resource "aws_eks_addon" "addons" {
   for_each = var.addons
-  cluster_name = aws_eks_cluster.example.name
+  cluster_name = aws_eks_cluster.main.name
   addon_name   = each.key
 }
 
