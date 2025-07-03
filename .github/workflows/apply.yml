@@ -24,7 +24,7 @@ jobs:
 #          terraform plan -backend-config=env-dev/state.tfvars
 
   Terraform-apply:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: echo
         run: echo "hello worlds"
