@@ -57,4 +57,4 @@ jobs:
 #          terraform apply -var-file=env-dev/main.tfvars -var vault_token=${{ secrets.token }} -auto-approve
 
         env:
-          vault_token: ${{ secrets.new }}
+          vault_token: ${{ secrets.token }}
