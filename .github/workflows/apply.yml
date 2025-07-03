@@ -29,13 +29,13 @@ jobs:
       - name: echo
         run: echo "hello worlds"
 
-      - name: check repo
-        uses: actions/checkout@v4
-
-      - name: terraform apply
-        run: |
-          terraform init -backend-config=env-dev/state.tfvars
-          terraform apply -var-file=env-dev/main.tfvars -auto-approve -var vault_token=${vault_token}
-
-        env:
-          vault_token: ${{ secrets.vault_token }}
+#      - name: check repo
+#        uses: actions/checkout@v4
+#
+#      - name: terraform apply
+#        run: |
+#          terraform init -backend-config=env-dev/state.tfvars
+#          terraform apply -var-file=env-dev/main.tfvars -auto-approve -var vault_token=${vault_token}
+#
+#        env:
+#          vault_token: ${{ secrets.vault_token }}
