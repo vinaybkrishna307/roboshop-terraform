@@ -43,18 +43,15 @@ jobs:
           sudo apt update
           sudo apt install -y terraform
 
-      - name: Debug vault token env (safe)
-        run: |
-          if [ -z "vault_token" ]; then
-            echo "vault_token is missing"
-            exit 1
-          else
-            echo "vault_token is set"
-          fi
-      - name: terraform apply
+#      - name: Debug vault token env (safe)
+#        run: |
+#          if [ -z "vault_token" ]; then
+#            echo "vault_token is missing"
+#            exit 1
+#          else
+#            echo "vault_token is set"
+#          fi
+      - name: Terraform Apply
         run: |
           terraform init -backend-config=env-dev/state.tfvars
-          terraform apply -var-file=env-dev/main.tfvars -var vault_token=${{ secrets.token }} -auto-approve
-
-        env:
-          vault_token: ${{ secrets.token }}
+          terraform apply -var-file=env-dev/main.tfvars -var "vault_token=${{ secrets.token }}" -auto-approve
