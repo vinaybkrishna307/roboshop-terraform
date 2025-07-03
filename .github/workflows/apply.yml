@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: [self-hosted]
     steps:
-      - name: Check runner
+      - name: Check runners
         run: |
           echo "Runner connected!"
           hostname
