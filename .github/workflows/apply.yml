@@ -1,13 +1,54 @@
-name: Final Fix
-
-on: workflow_dispatch
-
+name: terraform apply
+on: push
 jobs:
-  test:
-    runs-on: [self-hosted]
+
+  # before apply run init plan and then apply this is training so skipping to apply
+#  Terraform-Init:
+#    runs-on: self-hosted
+#    steps:
+#      - name: check repo
+#        uses: actions/checkout@v4
+#
+#      - name: terraform init
+#        run:
+#          terraform init -backend-config=env-dev/state.tfvars
+#
+#  Terraform-plan:
+#    runs-on: self-hosted
+#    steps:
+#      - name: check repo
+#        uses: actions/checkout@v4
+#
+#      - name: terraform plan
+#        run:
+#          terraform plan -backend-config=env-dev/state.tfvars
+
+  Terraform-apply:
+    runs-on: ubuntu-latest
     steps:
-      - name: Check runners
+      - name: echo
+        run: echo "hello worldsd"
+
+      - name: check repo
+        uses: actions/checkout@v4
+
+      - name: hashi apply
         run: |
-          echo "Runner connected!"
-          hostname
-          date
+          sudo yum install -y yum-utils
+          sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+          sudo yum -y install vault
+
+      - name: tera apply
+        run: |
+          sudo apt update
+          sudo apt-get install terraform
+
+      
+
+      - name: terraform apply
+        run: |
+          terraform init -backend-config=env-dev/state.tfvars
+          terraform apply -var-file=env-dev/main.tfvars -auto-approve -var vault_token=${vault_token}
+
+        env:
+          vault_token: ${{ secrets.vault_token }}
