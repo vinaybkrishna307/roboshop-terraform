@@ -32,7 +32,7 @@ jobs:
       - name: check repo
         uses: actions/checkout@v4
 
-      - name: install vault
+      - name: install vaultss
         run: |
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
           echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
@@ -43,10 +43,18 @@ jobs:
           sudo apt update
           sudo apt install -y terraform
 
+      - name: Debug vault token env (safe)
+        run: |
+          if [ -z "$VAULT_TOKEN" ]; then
+            echo "VAULT_TOKEN is missing"
+            exit 1
+          else
+            echo "VAULT_TOKEN is set"
+          fi
       - name: terraform apply
         run: |
           terraform init -backend-config=env-dev/state.tfvars
-          terraform apply -var-file=env-dev/main.tfvars -auto-approve -var vault_token=${vault_token}
+          terraform apply -var-file=env-dev/main.tfvars -var vault_token=${{ secrets.token }} -auto-approve
 
         env:
-          vault_token: ${{ secrets.vault_token }}
+          VAULT_TOKEN: ${{ secrets.token }}
