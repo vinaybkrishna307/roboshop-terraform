@@ -27,7 +27,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: echo
-        run: echo "hello worldsdsss"
+        run: echo "hello sadas"
 
 #      - name: check repo
 #        uses: actions/checkout@v4
