@@ -1,6 +1,6 @@
-name: terraform apply
-on: push
-jobs:
+#name: terraform apply
+#on: push
+#jobs:
 
   # before apply run init plan and then apply this is training so skipping to apply
 #  Terraform-Init:
@@ -22,12 +22,12 @@ jobs:
 #      - name: terraform plan
 #        run:
 #          terraform plan -backend-config=env-dev/state.tfvars
-
-  Terraform-apply:
-    runs-on: self-hosted
-    steps:
-      - name: echo
-        run: echo "hello sadasssssss"
+#
+#  Terraform-apply:
+#    runs-on: self-hosted
+#    steps:
+#      - name: echo
+#        run: echo "hello sadasssssss"
 
 #      - name: check repo
 #        uses: actions/checkout@v4
@@ -55,3 +55,20 @@ jobs:
 #        run: |
 #          terraform init -backend-config=env-dev/state.tfvars
 #          terraform apply -var-file=env-dev/main.tfvars -var "vault_token=${{ secrets.token }}" -auto-approve
+
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run script
+        run: echo "Running on self-hosted runner"
