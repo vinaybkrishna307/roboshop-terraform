@@ -24,34 +24,34 @@ jobs:
 #          terraform plan -backend-config=env-dev/state.tfvars
 
   Terraform-apply:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: echo
         run: echo "hello worldsd"
 
-      - name: check repo
-        uses: actions/checkout@v4
-#
-      - name: install vaultss
-        run: |
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-          sudo apt update && sudo apt install -y vault
-
-      - name: install terraform
-        run: |
-          sudo apt update
-          sudo apt install -y terraform
-
-#      - name: Debug vault token env (safe)
+#      - name: check repo
+#        uses: actions/checkout@v4
+##
+#      - name: install vaultss
 #        run: |
-#          if [ -z "vault_token" ]; then
-#            echo "vault_token is missing"
-#            exit 1
-#          else
-#            echo "vault_token is set"
-#          fi
-      - name: Terraform Apply
-        run: |
-          terraform init -backend-config=env-dev/state.tfvars
-          terraform apply -var-file=env-dev/main.tfvars -var "vault_token=${{ secrets.token }}" -auto-approve
+#          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+#          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+#          sudo apt update && sudo apt install -y vault
+#
+#      - name: install terraform
+#        run: |
+#          sudo apt update
+#          sudo apt install -y terraform
+#
+##      - name: Debug vault token env (safe)
+##        run: |
+##          if [ -z "vault_token" ]; then
+##            echo "vault_token is missing"
+##            exit 1
+##          else
+##            echo "vault_token is set"
+##          fi
+#      - name: Terraform Apply
+#        run: |
+#          terraform init -backend-config=env-dev/state.tfvars
+#          terraform apply -var-file=env-dev/main.tfvars -var "vault_token=${{ secrets.token }}" -auto-approve
