@@ -65,7 +65,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted,first]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
