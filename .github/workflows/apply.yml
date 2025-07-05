@@ -71,4 +71,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run script
-        run: echo "Running on self-hosted runnesrs"
+        run: echo "Running on self-hosted runneswrs"
